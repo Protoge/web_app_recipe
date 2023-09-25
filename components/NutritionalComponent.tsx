@@ -10,9 +10,10 @@ const NutritionalComponent = () => {
 
   const {nutritions} = useStore()
 
-  if(nutritions[0] === undefined){
-    return null
-  }
+  // hide
+  // if(nutritions[0] === undefined){
+  //   return null
+  // }
 
   
 

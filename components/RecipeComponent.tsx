@@ -5,6 +5,7 @@ import React from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
 import { Separator } from './ui/separator'
 import { motion , AnimatePresence} from 'framer-motion'
+import IngredientsComponent from './IngredientsComponent'
 
 const RecipeComponent = () => {
 
@@ -12,7 +13,6 @@ const RecipeComponent = () => {
 
   const foodRecipes = recipes[0] || []
 
-  console.log(foodRecipes)
 
   function truncateText(text: string, maxLength: number) {
     if (text.length > maxLength) {
@@ -23,8 +23,6 @@ const RecipeComponent = () => {
   }
 
   let currentItem = 0
-
-  console.log(foodRecipes)
 
   // hide 
   // if(foodRecipes.length === 0){
@@ -98,14 +96,17 @@ const RecipeComponent = () => {
       <Separator className='bg-black opacity-30'/>
       <span className='text-muted-foreground text-sm font-bold'>Ingredients:</span>
       <DialogDescription>
-      <motion.p key={recipe.title}
+      <motion.p 
+      
+      key={recipe.title}
       variants={recipeVariants}
       initial="hidden"
       animate="visible"
       exit={{ x: 0, opacity: 0, transition: { duration: 0.5 } }} >
-        {
-         recipe.ingredients
-        }
+        <p className='leading-loose'>
+          <IngredientsComponent ingredients={recipe.ingredients}/>
+        
+        </p>
         </motion.p>
          <Separator className='bg-black opacity-30'/>
       </DialogDescription>
@@ -129,9 +130,11 @@ const RecipeComponent = () => {
       initial="hidden"
       animate="visible"
       exit={{ x: 0, opacity: 0, transition: { duration: 0.5 } }} >
+        <p className='leading-loose'>
         {
          recipe.instructions
         }
+        </p>
         </motion.p>
          <Separator className='bg-black opacity-30'/>
       </DialogDescription>

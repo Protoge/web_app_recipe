@@ -1,6 +1,8 @@
+import WelcomeModal from '@/components/modals/welcome-modal'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Space_Mono } from 'next/font/google'
+import ModalProvider from '@/providers/modal-provider'
 
 const spaceMono = Space_Mono({
   subsets: ['latin'],
@@ -19,7 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={spaceMono.className}>{children}</body>
+      <body className={spaceMono.className}>
+        <ModalProvider/>
+        {children}
+      </body>
     </html>
   )
 }

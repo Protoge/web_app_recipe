@@ -1,23 +1,9 @@
 import { create, } from "zustand";
 
-type Nutrition = {
-    calories: number;
-    carbohydrates_total_g: number;
-    cholesterol_mg: number;
-    fat_saturated_g: number;
-    fat_total_g: number;
-    fiber_g: number;
-    name: string;
-    potassium_mg: number;
-    protein_g: number;
-    serving_size_g: number;
-    sodium_mg: number;
-    sugar_g: number;
-}
+
 
 type Recipe = {
     length: number;
-    map(arg0: (recipe: any) => {}): import("react").ReactNode;
     title: string;
     ingredients: string;
     servings: string;
@@ -25,9 +11,9 @@ type Recipe = {
   };
 
 type Store = {
-    nutritions: Nutrition[] | [];
+    nutritions: NutritionTypes;
     recipes: Recipe[] | [];
-    setNutritions: (newItem: Nutrition) => void;
+    setNutritions: (newItem: NutritionTypes) => void;
     setRecipes: (newItem:Recipe) => void;
     clearNutritions: () => void;
     clearRecipes:() => void;
@@ -35,9 +21,35 @@ type Store = {
 
 export const useStore = create<Store>((set,get) => ({
     recipes:[],
-    nutritions:[],
-    setNutritions:(nutrition) => set((state: any) => ({nutritions:[...state.nutritions, nutrition]})),
+    nutritions:{
+        calories:0,
+        carbohydrates_total_g:0,
+        cholesterol_mg:0,
+        fat_saturated_g:0,
+        fat_total_g:0,
+        fiber_g:0,
+        name:"",
+        potassium_mg:0,
+        protein_g:0,
+        serving_size_g:0,
+        sodium_mg:0,
+        sugar_g:0
+    },
+    setNutritions:(nutrition) => set((state: any) => ({nutritions:nutrition})),
     setRecipes:(recipe) => set((state:any) =>({recipes:[...state.recipes, recipe]})),
-    clearNutritions: () => set({nutritions:[]}),
+    clearNutritions: () => set({nutritions:{
+        calories:0,
+        carbohydrates_total_g:0,
+        cholesterol_mg:0,
+        fat_saturated_g:0,
+        fat_total_g:0,
+        fiber_g:0,
+        name:"",
+        potassium_mg:0,
+        protein_g:0,
+        serving_size_g:0,
+        sodium_mg:0,
+        sugar_g:0
+    }}),
     clearRecipes: () => set({recipes:[]})
 }))

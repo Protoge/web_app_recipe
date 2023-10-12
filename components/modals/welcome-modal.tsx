@@ -5,6 +5,7 @@ import { welcomeModal } from '@/hooks/use-modal'
 import { Separator } from '../ui/separator'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 
 const WelcomeModal = () => {
 
@@ -30,7 +31,7 @@ const WelcomeModal = () => {
         <Separator orientation='vertical' className='bg-white'/>
         <div>
           <div className='flex flex-col items-center justify-between'>
-            <Button className='bg-green-500/75' onClick={() => {onClose(); router.push("/sign-in")}}>Login</Button>
+            <Button className='bg-green-500/75' onClick={() => {onClose(); signIn("google")}}>Login</Button>
             <span>or</span>
             <Button className='bg-green-500/75' onClick={onClose}>Continue</Button>
           </div>

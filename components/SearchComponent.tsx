@@ -9,12 +9,18 @@ import LogoComponent from './LogoComponent';
 
 import { motion, useAnimation } from "framer-motion";
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
 const SearchComponent: React.FC = () => {
   const [foodName, setFoodName] = useState<string>('');
   const searchparams = useSearchParams();
   const router = useRouter()
   const {clearNutritions,setNutritions, clearRecipes,setRecipes,nutritions} = useStore()
+
+
+  const {data,status} = useSession()
+
+  console.log(status,data)
 
 
   const debouncedValueNutrition = useDebounce<string>(searchparams.get("foodName") || "",1500)

@@ -14,6 +14,7 @@ export const welcomeModal = create(persist<WelcomeModalProps>((set) => ({
     onClose: () => set({isOpen:false})
 }), {
     name:"welcome-modal",
+    skipHydration:true,
     storage:createJSONStorage(() => sessionStorage)
 }))
 

@@ -8,8 +8,9 @@ import { useStore } from '@/hooks/use-hook';
 import LogoComponent from './LogoComponent';
 
 import { motion, useAnimation } from "framer-motion";
-import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession, } from 'next-auth/react';
+import { getAuthSession } from '@/lib/auth';
+
 
 const SearchComponent: React.FC = () => {
   const [foodName, setFoodName] = useState<string>('');
@@ -18,14 +19,10 @@ const SearchComponent: React.FC = () => {
   const {clearNutritions,setNutritions, clearRecipes,setRecipes,nutritions} = useStore()
 
 
-  const {data,status} = useSession()
-
-  console.log(status,data)
-
-
   const debouncedValueNutrition = useDebounce<string>(searchparams.get("foodName") || "",1500)
 
   const debouncedValueRecipe = useDebounce<string>(searchparams.get("foodName") || "", 2500)
+
   useEffect(() => {
     
     axios.get(`http://localhost:3000/api/nutrition/${debouncedValueNutrition}`).then(data => {

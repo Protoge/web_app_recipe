@@ -15,6 +15,7 @@ const AnimatedComponent: React.FC<AnimatedComponentProps & MotionProps> = ({
 
   useEffect(() => {
     setIsMounted(true)
+    // remove this if finish testing
     welcomeModal.persist.clearStorage()
   },[isMounted])
 

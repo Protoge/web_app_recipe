@@ -1,7 +1,6 @@
 "use client"
 import { useStore } from '@/hooks/use-hook';
 import React, { useEffect, useState } from 'react';
-import { PieChart, Pie, Cell, Legend, } from 'recharts';
 import AdditionalNutritionalComponent from './AdditionalNutritionalComponent';
 import PieChartComponent from './PieChartComponent';
 import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';

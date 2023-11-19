@@ -1,33 +1,20 @@
-"use client"
 import React from 'react'
-import { Button } from './ui/button'
-import { signIn, signOut, useSession } from 'next-auth/react'
 
-const Navbar = () => {
+import SignInButtonComponent from './SignInButtonComponent'
+import NavigationalMenuAuthenticated from './NavigationalMenuAuthenticated'
+import { getRecipes } from '@/actions/getRecipes'
+import { getAuthSession } from '@/lib/auth'
 
-    const {status} = useSession()
 
-    
+const Navbar = async () => {
 
-  return (
-    <div className='absolute right-0'>
-        {
-            status === "authenticated" ? (
-                <>
-                    <Button className='rounded-none'>Saved recipes</Button>
-                    <Button className='rounded-none' onClick={() => signOut()} variant="destructive">
-                        Sign Out
-                    </Button>
-                </>
-            ) : (
-                <>
-                    <Button className='rounded-none' onClick={() => signIn("google")}>Sign in</Button>
-                </>
-            )
-        }
-        
-    </div>
-  )
+    const data = await getAuthSession()
+
+    const recipes = await getRecipes(data?.user.id!)
+
+    return (
+        <NavigationalMenuAuthenticated recipes={recipes}/>
+    )
 }
 
 export default Navbar

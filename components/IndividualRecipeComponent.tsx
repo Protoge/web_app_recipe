@@ -8,6 +8,7 @@ import { Button } from './ui/button'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 interface IndividualRecipeComponent{
     recipe:Recipe
@@ -16,6 +17,8 @@ interface IndividualRecipeComponent{
 const IndividualRecipeComponent = ({recipe}:IndividualRecipeComponent) => {
 
     const {data,status} = useSession()
+
+    const router = useRouter()
 
     function truncateText(text: string, maxLength: number) {
         if (text.length > maxLength) {
@@ -41,7 +44,7 @@ const IndividualRecipeComponent = ({recipe}:IndividualRecipeComponent) => {
     const saveRecipeToDB = async () => {
         try{
         await axios.post(`/api/save-recipe/${data?.user.id}`,dataRecipe)
-
+        router.refresh()
         toast.success("Recipe saved")
         }catch(error){
         console.log(error)

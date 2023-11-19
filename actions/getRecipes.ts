@@ -1,27 +1,14 @@
 import { db } from "@/lib/db"
 import { Recipe } from "@prisma/client"
 
-type Recipes = {
-    title:string;
-    ingredients:string;
-    servings:string;
-    instructions:string;
-}
 
-export const getRecipes = async (userEmail:string): Promise<Recipes[]> => {
+
+export const getRecipes = async (id:string): Promise<Recipe[]> => {
     
-
     try {
-        const user = await db.user.findUnique({
-            where:{
-                email:userEmail
-            }
-        })
-    
-    
         const recipes = await db.recipe.findMany({
             where:{
-                userId: user?.id
+                userId: id
             }
         })
     

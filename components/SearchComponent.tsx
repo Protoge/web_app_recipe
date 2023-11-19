@@ -23,7 +23,7 @@ const SearchComponent: React.FC = () => {
 
   useEffect(() => {
 
-    axios.get(`http://localhost:3000/api/nutrition/${debouncedValueNutrition}`).then(data => {
+    axios.get(`/api/nutrition/${debouncedValueNutrition}`).then(data => {
       clearNutritions();
 
 
@@ -31,7 +31,7 @@ const SearchComponent: React.FC = () => {
 
     }).catch(error => clearNutritions())
 
-    axios.get(`http://localhost:3000/api/recipe/${debouncedValueRecipe}`).then(data => {
+    axios.get(`/api/recipe/${debouncedValueRecipe}`).then(data => {
       clearRecipes()
       setRecipes(data.data)
     }).catch(error => console.log(error))

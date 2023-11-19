@@ -11,16 +11,16 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/t
 
 const NutritionalComponent = () => {
   const [animationData, setAnimationData] = useState<{ name: string; value: number; }[]>([]);
-  const {nutritions} = useStore()
-  const [dialogOpen,setDialogOpen] = useState(false)
+  const { nutritions } = useStore()
+  const [dialogOpen, setDialogOpen] = useState(false)
 
-  
+
 
   useEffect(() => {
     // Update the animationData when nutritions change
-   
+
     if (nutritions.calories === 0) {
-      
+
       return setAnimationData([{ name: "Empty", value: 100 }]);
     }
     const newData = [
@@ -46,19 +46,19 @@ const NutritionalComponent = () => {
     <div className={cn('opacity-75 hover:opacity-100 transition duration-200 ease-in-out -m-20', theme.theme === "dark" ? "text-black" : "text-white")}>
       <Dialog>
         <DialogTrigger>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-            <PieChartComponent animationData={animationData}/>
-            </TooltipTrigger>
-            <TooltipContent className='relative z-10 top-[100px]' >
-              <p>Click for more information</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <PieChartComponent animationData={animationData} />
+              </TooltipTrigger>
+              <TooltipContent className='relative z-10 top-[100px]' >
+                <p>Click for more information</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </DialogTrigger>
         <DialogContent className='text-black'>
-        <AdditionalNutritionalComponent nutritions={nutritions}/>
+          <AdditionalNutritionalComponent nutritions={nutritions} />
         </DialogContent>
       </Dialog>
     </div>

@@ -31,9 +31,11 @@ const SearchComponent: React.FC = () => {
 
     }).catch(error => clearNutritions())
 
-    axios.get(`/api/recipe/${debouncedValueRecipe}`).then(data => {
-      clearRecipes()
-      setRecipes(data.data)
+    axios.get(`/api/recipe/${debouncedValueRecipe}`).then(async (data) => {
+      await clearRecipes()
+      data.data.map((recipe: any) => {
+        setRecipes(recipe)
+      })
     }).catch(error => console.log(error))
 
 

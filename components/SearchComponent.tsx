@@ -76,7 +76,8 @@ const SearchComponent: React.FC = () => {
           placeholder="Enter your food..."
           onChange={(e) => {
             setFoodName(e.target.value)
-            router.push(`http://localhost:3000/?foodName=${e.target.value}`)
+
+            router.push(`/?foodName=${e.target.value}`)
           }}
         />
       </motion.div>

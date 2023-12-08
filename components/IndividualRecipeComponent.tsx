@@ -43,9 +43,14 @@ const IndividualRecipeComponent = ({ recipe }: IndividualRecipeComponent) => {
 
   const saveRecipeToDB = async () => {
     try {
-      await axios.post(`/api/save-recipe/${data?.user.id}`, dataRecipe)
+      const res = await axios.post(`/api/save-recipe/${data?.user.id}`, dataRecipe)
       router.refresh()
-      toast.success("Recipe saved")
+      if (res.data.error) {
+        return toast.error(res.data.error)
+      }
+
+      toast.success("Reciped saved")
+
     } catch (error) {
       console.log(error)
       toast.error("Something went wrong")
@@ -75,9 +80,8 @@ const IndividualRecipeComponent = ({ recipe }: IndividualRecipeComponent) => {
                   initial="hidden"
                   animate="visible"
                   exit={{ x: 0, opacity: 0, transition: { duration: 0.5 } }} >
-                  {recipe.title} {
-                    status == "authenticated" && (<Button onClick={() => saveRecipeToDB()}>Save recipe</Button>)
-                  }
+                  {recipe.title} {" "}
+                  <Button onClick={() => saveRecipeToDB()}>Save recipe</Button>
                 </motion.p>
 
               </DialogTitle>
